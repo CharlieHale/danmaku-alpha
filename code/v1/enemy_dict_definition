@@ -1,0 +1,40 @@
+GAMEOBJECT DICT
+{
+	"image" : String, image name
+	"type" : bullet, enemy
+	"spawns_at" : int, tick id of spawn at.
+	"invulnerable" : boolean,
+	"velocity" : (float, float), velocity
+	"position" : (float, float), position
+	"outer_size" : (int, int), (height, width)
+	"hitbox_size" : (int, int), (height, width)
+	"actions" : MAIN ACTIONS DICT
+}
+
+MAIN ACTIONS DICT
+{
+	"repeatings" : [PATTERN DICT],
+	"singles" : [SINGLE ACTION DICT],
+}
+
+PATTERN DICT
+{
+	"tick-length" : int, number of ticks the pattern is in length
+	"actions" : [SINGLE ACTION DICT]
+}
+
+SINGLE ACTION DICT:
+{
+	"tick" : int, number of ticks the thing happens into the pattern
+	"action_type" : velocity, position, spawn, destroy
+	"new_velocity" : new velocity, if action_type = velocity
+	"new_position" : new position, if action_type = position
+	"spawn" : [SPAWN DICT] if action_type = spawn
+}
+
+SPAWN DICT
+{
+	"spawn_type" : enemy, bullet
+	"pattern_name" : name of the pattern it'll be spawning
+	"parameters" : parameters to be passed to pattern_name
+}
