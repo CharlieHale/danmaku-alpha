@@ -35,10 +35,13 @@ class Mediator(object):
 		self.check_bound_bullets()
 
 	def delayed_bullets(self): 
+		removals = []
 		for b in self.pending_enemy_bullets:
 			if b.decrement_tick_delay():
-				self.pending_enemy_bullets.remove(b)
-				self.enemy_bullets.append(b)
+				removals.append(b)
+		for r in removals:
+			self.pending_enemy_bullets.remove(r)
+			self.enemy_bullets.append(r)
 
 	def stage_stuff(self):
 		for s in self.stage.get("spawnings"):

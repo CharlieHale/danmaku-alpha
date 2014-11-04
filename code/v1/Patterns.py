@@ -45,10 +45,39 @@ def arc_func(spawner, parameters):
 		bullets.append(bullet)
 	return bullets
 
+def line_func(spawner,parameters):
+	"""pattern_name = line ------- Standard parameters, plus:
+		Position_x_offset
+		Position_y_offset
+		n_bullets
+	"""
+	bullets = []
+	bullet_definition = BULLET_TYPE[parameters["bullet_type"]]
+	bullet_image = pygame.image.load("../../graphics/{}".format(bullet_definition["image"]))
+	bullet_dimensions = bullet_definition.get("dimensions")
+
+	position_x_offset = parameters.get("position_x_offset",35)
+	position_y_offset = parameters.get("position_y_offset",0)
+	angle_offset = parameters.get("angle_offset",0)
+	n_bullets = parameters.get("n_bullets",1)
+
+	speed = parameters.get("bullet_speed",3.5)
+	target = parameters.get("target","absolute")
+	base_position = spawner.get_position(parameters.get("spawn_from","midbottom"))
+	for n in range(n_bullets):
+		offset = n - math.ceil(n_bullets / 2)
+		pos = ((base_position[0] + offset * position_x_offset), (base_position[1] + offset * position_y_offset))
+		frame_angle = get_frame_angle(target,spawner.mediator,pos,spawner)
+		angle = frame_angle + offset * angle_offset
+		angle = math.radians(angle)
+		bullet = Bullet(spawner.mediator,(speed*math.sin(angle),speed*math.cos(angle)),bullet_image,pos,bullet_dimensions,parameters.get("actions",{}))
+		bullets.append(bullet)
+	return bullets
 		
 ARC_FUNC = lambda spawner, parameters: arc_func(spawner,parameters)
+LINE_FUNC = lambda spawner, parameters: line_func(spawner,parameters)
 
-PATTERNS = { "arc" : ARC_FUNC }
+PATTERNS = { "arc" : ARC_FUNC, "line" : LINE_FUNC }
 
 BULLET_TYPE = {"test" : {
 			"image" : "test-bullet.png",
