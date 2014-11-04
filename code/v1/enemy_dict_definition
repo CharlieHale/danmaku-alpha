@@ -37,5 +37,15 @@ SPAWN DICT
 {
 	"spawn_type" : enemy, bullet
 	"pattern_name" : name of the pattern it'll be spawning
-	"parameters" : parameters to be passed to pattern_name
+	"parameters" : SPAWN PARAMETER LIST
+}
+
+SPAWN PARAMETER LIST
+{
+	"bullet_type" : str - string identifier for bullet
+	"bullet_speed" : float, bullet speed
+	"delay" : int, delay between each bullet
+	"target" : str - player, absolute
+	"spawn_from" : pygame.Rect attr
+	PLUS, extra on a per-function basis
 }

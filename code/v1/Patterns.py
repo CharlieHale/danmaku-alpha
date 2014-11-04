@@ -13,21 +13,25 @@ def get_frame_angle(frame_str,mediator,position,spawner):
 		angle_deg = math.degrees(angle)+180
 		return angle_deg
 		
-		
-		
-
 def arc_func(spawner, parameters):
+	"""pattern_name = arc ------- Standard parameters, plus:
+		angle_start
+		angle_end
+		angle_interval
+	"""
 	bullets = []
 	bullet_definition = BULLET_TYPE[parameters["bullet_type"]]
 	bullet_image = pygame.image.load("../../graphics/{}".format(bullet_definition["image"]))
 
-	speed = parameters.get("bullet_speed",3.5)
 	angle_start = parameters.get("angle_start",0)
 	angle_end = parameters.get("angle_end",180)
 	angle_interval = parameters.get("angle_interval",15)
+
+	speed = parameters.get("bullet_speed",3.5)
 	target = parameters.get("target","absolute")
 	position = spawner.get_position(parameters.get("spawn_from","midbottom"))
 	n_angles = ((angle_end - angle_start) / angle_interval) + 1
+
 	frame_angle = get_frame_angle(target,spawner.mediator,position,spawner)
 
 	for n in range(n_angles):
