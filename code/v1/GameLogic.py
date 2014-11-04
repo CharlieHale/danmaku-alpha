@@ -3,7 +3,7 @@ from Mediator import *
 import sys, pygame, math
 
 class DanmakuGame(object):
-	size = width, height = 500,900
+	size = width, height = 500,700
 	def __init__(self):
 		pygame.init()
 		self.screen = pygame.display.set_mode(self.size)
@@ -12,6 +12,7 @@ class DanmakuGame(object):
 		
 	def mainLoop(self):
 		import stage_1
+		myfont = pygame.font.SysFont("monospace",15)
 		stage = stage_1.stage
 		self.mediator.set_stage(stage)
 
@@ -26,6 +27,12 @@ class DanmakuGame(object):
 
 			self.mediator.runTick()
 			self.mediator.add_objects_to_screen(self.screen)
+			label = myfont.render("{} FPS".format(int(self.clock.get_fps())),1,(255,255,0))
+			self.screen.blit(label, (400,650))
+			label = myfont.render("{} Objects".format(len(self.mediator.get_all_objects())),1,(255,255,0))
+			self.screen.blit(label, (0,650))
+			label = myfont.render("Tick: {}".format(tick),1,(255,255,0))
+			self.screen.blit(label, (200,650))
 			pygame.display.flip()
 			self.clock.tick(60)
-			#print("TICK: {}, FPS: {}".format(self.mediator.get_tick(),self.clock.get_fps()))
+			

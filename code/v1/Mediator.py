@@ -37,10 +37,11 @@ class Mediator(object):
 
 	def bullet_collisions(self):
 		player_hb = self.player.get_hitbox()
-		for b in self.enemy_bullets:
-			if b.get_hitbox().colliderect(player_hb):
-				print "DEADSLES"
+		bullets = [hitbox.get_hitbox() for hitbox in self.enemy_bullets]
+		if player_hb.collidelist(bullets) > 0:
+			print "DEADSLES"
 
+	
 	def delayed_bullets(self): 
 		removals = []
 		for b in self.pending_enemy_bullets:

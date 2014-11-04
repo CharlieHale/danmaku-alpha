@@ -11,7 +11,7 @@ stage = {"spawnings" : [{
                 "singles" : [ { "tick" : 10000, "action_type" : "destroy" }, { "tick" : 120, "action_type" : "velocity", "new_velocity" : (0,0) } ],
 		"repeatings" : [
 			{
-				"tick-length" : 76,
+				"tick-length" : 72,
 				"begins-tick" : 20,
 				"actions" : [
 					{
@@ -34,7 +34,7 @@ stage = {"spawnings" : [{
 						}
                                         },
 						{
-						"tick" : 39,
+						"tick" : 37,
 						"action_type" : "spawn",
 						"spawn" : {
 							"spawn_type" : "bullet",
@@ -87,7 +87,7 @@ stage = {"spawnings" : [{
 								"angle_offset" : 2,
 								"target" : "player",
 								"bullet_type" : "test",
-								"bullet_speed" : 1.75,
+								"bullet_speed" : 3,
 								"spawn_from" : "midbottom",
 							}
 						}
@@ -126,7 +126,7 @@ stage = {"spawnings" : [{
 								"angle_offset" : 2,
 								"target" : "player",
 								"bullet_type" : "test",
-								"bullet_speed" : 1.75,
+								"bullet_speed" : 3,
 								"spawn_from" : "midbottom",
 							}
 						}

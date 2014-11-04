@@ -28,3 +28,5 @@ PHASES:
 		On-end
 		//Stuff like names? For spellcard equivilents.
 	
+HITBOXES:
+	Need hitbox rectangle to be RELATIVE
