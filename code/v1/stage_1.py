@@ -25,10 +25,11 @@ stage = {"spawnings" : [{
 								"angle_end" : 5,
 								"angle_interval" : 5,
 								"bullet_type" : "test",
-								"bullet_speed" : 2.5,
+								"bullet_speed" : 3.5,
 								"delay" : 0,
 								"target" : "player",
 								"spawn_from" : "midbottom",
+								"actions" : { "repeatings" : [{"tick-length" : 5, "actions" : [{"tick" : 1, "action_type" : "velocity", "d_velocity": (0.05,0.05) }]}] },
 							}
 						}
 			

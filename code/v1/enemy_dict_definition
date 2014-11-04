@@ -29,7 +29,9 @@ SINGLE ACTION DICT:
 	"tick" : int, number of ticks the thing happens into the pattern
 	"action_type" : velocity, position, spawn, destroy
 	"new_velocity" : new velocity, if action_type = velocity
+	"d_velocity" : change in velocity, if action_type = velocity
 	"new_position" : new position, if action_type = position
+	"d_position" : change in position, if action_type = position
 	"spawn" : [SPAWN DICT] if action_type = spawn
 }
 
@@ -46,6 +48,6 @@ SPAWN PARAMETER LIST
 	"bullet_speed" : float, bullet speed
 	"delay" : int, delay between each bullet
 	"target" : str - player, absolute
-	"spawn_from" : pygame.Rect attr
+	"spawn_from" : pygame.Rect attr string
 	PLUS, extra on a per-function basis
 }

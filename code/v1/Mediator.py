@@ -63,7 +63,10 @@ class Mediator(object):
 		if action.get("action_type") == "destroy":
 			self.destroy_object(obj)
 		if action.get("action_type") == "velocity":
-			obj.set_velocity(action.get("new_velocity"))
+			if action.get("new_velocity",None) is not None:
+				obj.set_velocity(action.get("new_velocity"))
+			elif action.get("d_velocity",None) is not None:
+				obj.modify_velocity(action.get("d_velocity"))
 
 				
 

@@ -1,0 +1,30 @@
+GENERAL CODING STYLE:
+	Standardise function/variable names
+
+VELOCITY:
+	Change to a vector (magnitude, x, y)
+	Standardise phrasing
+
+REPEATINGS:
+	begins-tick: tick the pattern begins (relative)
+	tick-length: length of the pattern
+	***n_repetition: number of times it happens (inf if not set)
+
+GameData:
+	DICTIONARY IN GameData.py OF PRE-SET OBJECTS
+		Image
+		External size
+		Hitbox
+
+Actual gameplay:
+	Collisions important :P
+
+PHASES:
+	Some dictionary change for enemies, phases.
+		Health
+		Set of actions
+		Invulnerable?
+		Timeout
+		On-end
+		//Stuff like names? For spellcard equivilents.
+	

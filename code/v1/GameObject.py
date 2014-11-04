@@ -51,3 +51,9 @@ class GameObject(object):
 
 	def set_velocity(self,vel):
 		self.speed = vel
+
+	def get_velocity(self):
+		return self.speed
+
+	def modify_velocity(self,vel):
+		self.speed = (self.speed[0] + vel[0],self.speed[1] + vel[1])

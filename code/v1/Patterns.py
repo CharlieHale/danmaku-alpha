@@ -39,7 +39,7 @@ def arc_func(spawner, parameters):
 		angle = (angle_start + (n * angle_interval) + frame_angle)
 		delay = parameters.get("delay",2) * n
 		rads = math.radians(angle)
-		bullet = Bullet(spawner.mediator,(speed*math.sin(rads),speed*math.cos(rads)),bullet_image,position,bullet_dimensions,bullet_definition["actions"])
+		bullet = Bullet(spawner.mediator,(speed*math.sin(rads),speed*math.cos(rads)),bullet_image,position,bullet_dimensions,parameters.get("actions",{}))
 		bullet.set_parent(spawner)
 		bullet.set_tick_delay(delay)
 		bullets.append(bullet)
