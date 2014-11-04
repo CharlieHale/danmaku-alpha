@@ -22,6 +22,7 @@ def arc_func(spawner, parameters):
 	bullets = []
 	bullet_definition = BULLET_TYPE[parameters["bullet_type"]]
 	bullet_image = pygame.image.load("../../graphics/{}".format(bullet_definition["image"]))
+	bullet_dimensions = bullet_definition.get("dimensions")
 
 	angle_start = parameters.get("angle_start",0)
 	angle_end = parameters.get("angle_end",180)
@@ -38,7 +39,7 @@ def arc_func(spawner, parameters):
 		angle = (angle_start + (n * angle_interval) + frame_angle)
 		delay = parameters.get("delay",2) * n
 		rads = math.radians(angle)
-		bullet = Bullet(spawner.mediator,(speed*math.sin(rads),speed*math.cos(rads)),bullet_image,position,(20,20),bullet_definition["actions"])
+		bullet = Bullet(spawner.mediator,(speed*math.sin(rads),speed*math.cos(rads)),bullet_image,position,bullet_dimensions,bullet_definition["actions"])
 		bullet.set_parent(spawner)
 		bullet.set_tick_delay(delay)
 		bullets.append(bullet)
@@ -51,6 +52,7 @@ PATTERNS = { "arc" : ARC_FUNC }
 
 BULLET_TYPE = {"test" : {
 			"image" : "test-bullet.png",
-			"actions" : []
+			"actions" : [],
+			"dimensions" : (20,20),
 			}
 		}
