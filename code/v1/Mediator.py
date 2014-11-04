@@ -3,6 +3,7 @@ from GameObject import *
 from Player import *
 from Bullet import *
 from Spawner import * 
+from Player import *
 import Patterns
 
 import sys, pygame, math
@@ -12,18 +13,32 @@ class Mediator(object):
 		self.enemy_bullets = []
 		self.pending_enemy_bullets = []
 		self.enemies = []
+		self.player = Player(self)
 		self.tick = 0
 		self.size = size
 
+	def get_player_position(self):
+		return self.player.get_rect()
+
 	def set_stage(self,stage_dict):
 		self.stage = stage_dict
+
+	def controller_input(self,input_array):
+		self.player.controller_input(input_array)
 
 	def runTick(self):
 		self.tick += 1
 		self.stage_stuff()
 		self.actions()
-		self.move_bullets()
+		self.delayed_bullets()
+		self.move_units()
 		self.check_bound_bullets()
+
+	def delayed_bullets(self): 
+		for b in self.pending_enemy_bullets:
+			if b.decrement_tick_delay():
+				self.pending_enemy_bullets.remove(b)
+				self.enemy_bullets.append(b)
 
 	def stage_stuff(self):
 		for s in self.stage.get("spawnings"):
@@ -47,22 +62,21 @@ class Mediator(object):
 				self.add_enemy_bullets(bullets)
 		if action.get("action_type") == "destroy":
 			self.destroy_object(obj)
+		if action.get("action_type") == "velocity":
+			obj.set_velocity(action.get("new_velocity"))
 
 				
 
 	def spawn_from_dict(self,spawn):
 		image = pygame.image.load("../../graphics/{}".format(spawn["image"]))
 		if spawn["type"] == "enemy":
-			s = Spawner(spawn["velocity"],image,spawn["position"],spawn["outer_size"],spawn["actions"])
+			s = Spawner(self,spawn["velocity"],image,spawn["position"],spawn["outer_size"],spawn["actions"])
 			s.set_tick_made(self.get_tick())
 			self.add_enemy(s)
 		
 	def add_enemy_bullets(self,bullets):
 		for b in bullets:
-			if True:
-				self.enemy_bullets.append(b)
-			else:
-				self.pending_enemy_bullets.append(b)
+			self.pending_enemy_bullets.append(b)
 
 	def add_enemy(self,enemy):
 		self.enemies.append(enemy)
@@ -76,14 +90,15 @@ class Mediator(object):
 		elif type(obj) is Spawner:
 			self.enemies.remove(obj)
 
-	def move_bullets(self):
-		for b in self.enemy_bullets:
+	def move_units(self):
+		for b in self.get_all_objects():
 			b.move()
 
 	def get_all_objects(self):
 		objs = []
 		objs += self.enemy_bullets
 		objs += self.enemies
+		objs.append(self.player)
 		return objs
 
 	def add_objects_to_screen(self,screen):

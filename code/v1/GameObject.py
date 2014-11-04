@@ -2,11 +2,14 @@ from GameLogic import *
 import pygame
 
 class GameObject(object):
-	def __init__(self,speed,image,pos,dimensions,action_dict):
+	def __init__(self,mediator,speed,image,pos,dimensions,action_dict):
+		rect_pos = pygame.Rect(0,0,dimensions[0],dimensions[1])
+		rect_pos.center = pos
+		self.mediator = mediator
 		self.speed = speed
 		self.dimensions = dimensions
 		self.image = image
-		self.pos = pos
+		self.pos = rect_pos
 		self.action_dict = action_dict
 		self.tick_delay = 0
 		self.tick_made = 0
@@ -20,10 +23,13 @@ class GameObject(object):
 
 	def set_tick_delay(self,n_ticks):
 		self.tick_delay = n_ticks
+
+	def get_position(self,posstring):
+		return getattr(self.get_rect(), posstring)
 	
 	def decrement_tick_delay(self):
-		self.tick_made -= 1
-		if (self.tick_made == 0):
+		self.tick_delay -= 1
+		if (self.tick_delay <= 0):
 			return True
 		else:
 			return False
@@ -42,3 +48,6 @@ class GameObject(object):
 
 	def actions(self,tick):
 		return []
+
+	def set_velocity(self,vel):
+		self.speed = vel

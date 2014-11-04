@@ -19,6 +19,8 @@ class DanmakuGame(object):
 			tick = self.mediator.get_tick()
 			for event in pygame.event.get():
 				if event.type == "pygame.QUIT": sys.exit
+
+			self.mediator.controller_input(pygame.key.get_pressed())
 			
 			self.screen.fill((0,0,0))
 
@@ -26,4 +28,4 @@ class DanmakuGame(object):
 			self.mediator.add_objects_to_screen(self.screen)
 			pygame.display.flip()
 			self.clock.tick(60)
-			print("TICK: {}, FPS: {}".format(self.mediator.get_tick(),self.clock.get_fps()))
+			#print("TICK: {}, FPS: {}".format(self.mediator.get_tick(),self.clock.get_fps()))

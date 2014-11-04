@@ -19,6 +19,7 @@ MAIN ACTIONS DICT
 
 PATTERN DICT
 {
+	"begins-tick" : int
 	"tick-length" : int, number of ticks the pattern is in length
 	"actions" : [SINGLE ACTION DICT]
 }
