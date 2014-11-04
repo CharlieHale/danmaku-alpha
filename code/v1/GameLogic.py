@@ -3,7 +3,7 @@ from Mediator import *
 import sys, pygame, math
 
 class DanmakuGame(object):
-	size = width, height = 400,800
+	size = width, height = 500,900
 	def __init__(self):
 		pygame.init()
 		self.screen = pygame.display.set_mode(self.size)

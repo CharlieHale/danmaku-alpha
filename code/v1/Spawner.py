@@ -1,8 +1,8 @@
 from GameObject import *
 
 class Spawner(GameObject):
-	def __init__(self,mediator,speed,image,pos,dimensions,action_dict):
-		super(Spawner,self).__init__(mediator,speed,image,pos,dimensions,action_dict)
+	def __init__(self,mediator,speed,image,pos,dimensions,hitbox,action_dict):
+		super(Spawner,self).__init__(mediator,speed,image,pos,dimensions,hitbox,action_dict)
 
 	def actions(self,tick):
 		actions_activated = []

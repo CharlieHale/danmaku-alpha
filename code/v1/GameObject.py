@@ -2,10 +2,11 @@ from GameLogic import *
 import pygame
 
 class GameObject(object):
-	def __init__(self,mediator,speed,image,pos,dimensions,action_dict):
+	def __init__(self,mediator,speed,image,pos,dimensions,hitbox,action_dict):
 		rect_pos = pygame.Rect(0,0,dimensions[0],dimensions[1])
 		rect_pos.center = pos
 		self.mediator = mediator
+		self.hitbox = hitbox
 		self.speed = speed
 		self.dimensions = dimensions
 		self.image = image
@@ -42,6 +43,13 @@ class GameObject(object):
 
 	def get_rect(self):
 		return pygame.Rect(int(self.pos[0]),int(self.pos[1]),self.dimensions[0],self.dimensions[1])
+
+	def get_hitbox(self):
+		rect = self.get_rect()
+		center = rect.center
+		hitbox_rect = pygame.Rect(0,0,self.hitbox[0],self.hitbox[1])
+		hitbox_rect.center = center
+		return hitbox_rect
 
 	def get_image(self):
 		return self.image

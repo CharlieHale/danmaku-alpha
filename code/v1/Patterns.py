@@ -23,6 +23,7 @@ def arc_func(spawner, parameters):
 	bullet_definition = BULLET_TYPE[parameters["bullet_type"]]
 	bullet_image = pygame.image.load("../../graphics/{}".format(bullet_definition["image"]))
 	bullet_dimensions = bullet_definition.get("dimensions")
+	bullet_hitbox = bullet_definition.get("hitbox",(1,1))
 
 	angle_start = parameters.get("angle_start",0)
 	angle_end = parameters.get("angle_end",180)
@@ -39,7 +40,7 @@ def arc_func(spawner, parameters):
 		angle = (angle_start + (n * angle_interval) + frame_angle)
 		delay = parameters.get("delay",2) * n
 		rads = math.radians(angle)
-		bullet = Bullet(spawner.mediator,(speed*math.sin(rads),speed*math.cos(rads)),bullet_image,position,bullet_dimensions,parameters.get("actions",{}))
+		bullet = Bullet(spawner.mediator,(speed*math.sin(rads),speed*math.cos(rads)),bullet_image,position,bullet_dimensions,bullet_hitbox,parameters.get("actions",{}))
 		bullet.set_parent(spawner)
 		bullet.set_tick_delay(delay)
 		bullets.append(bullet)
@@ -55,6 +56,7 @@ def line_func(spawner,parameters):
 	bullet_definition = BULLET_TYPE[parameters["bullet_type"]]
 	bullet_image = pygame.image.load("../../graphics/{}".format(bullet_definition["image"]))
 	bullet_dimensions = bullet_definition.get("dimensions")
+	bullet_hitbox = bullet_definition.get("hitbox",(1,1))
 
 	position_x_offset = parameters.get("position_x_offset",35)
 	position_y_offset = parameters.get("position_y_offset",0)
@@ -70,7 +72,7 @@ def line_func(spawner,parameters):
 		frame_angle = get_frame_angle(target,spawner.mediator,pos,spawner)
 		angle = frame_angle + offset * angle_offset
 		angle = math.radians(angle)
-		bullet = Bullet(spawner.mediator,(speed*math.sin(angle),speed*math.cos(angle)),bullet_image,pos,bullet_dimensions,parameters.get("actions",{}))
+		bullet = Bullet(spawner.mediator,(speed*math.sin(angle),speed*math.cos(angle)),bullet_image,pos,bullet_dimensions,bullet_hitbox,parameters.get("actions",{}))
 		bullets.append(bullet)
 	return bullets
 		
@@ -83,5 +85,6 @@ BULLET_TYPE = {"test" : {
 			"image" : "test-bullet.png",
 			"actions" : [],
 			"dimensions" : (20,20),
+			"hitbox" : (15,15),
 			}
 		}

@@ -4,14 +4,14 @@ stage = {"spawnings" : [{
 	"spawns_at" : 20,
 	"invulnerable" : True,
 	"velocity" : (0,0),
-	"position" : (200, 200),
+	"position" : (250, 100),
 	"outer_size" : (20, 60),
 	"hithox_size" : (20, 60),
 	"actions" : { 
-                "singles" : [ { "tick" : 100, "action_type" : "destroy" }, { "tick" : 120, "action_type" : "velocity", "new_velocity" : (0,0) } ],
+                "singles" : [ { "tick" : 10000, "action_type" : "destroy" }, { "tick" : 120, "action_type" : "velocity", "new_velocity" : (0,0) } ],
 		"repeatings" : [
 			{
-				"tick-length" : 50,
+				"tick-length" : 76,
 				"begins-tick" : 20,
 				"actions" : [
 					{
@@ -34,7 +34,7 @@ stage = {"spawnings" : [{
 						}
                                         },
 						{
-						"tick" : 26,
+						"tick" : 39,
 						"action_type" : "spawn",
 						"spawn" : {
 							"spawn_type" : "bullet",
@@ -65,7 +65,7 @@ stage = {"spawnings" : [{
 	"spawns_at" : 100,
 	"invulnerable" : True,
 	"velocity" : (0,0),
-	"position" : (200, 400),
+	"position" : (100, 100),
 	"outer_size" : (20, 60),
 	"hithox_size" : (20,60),
 	"actions" : { 
@@ -87,7 +87,46 @@ stage = {"spawnings" : [{
 								"angle_offset" : 2,
 								"target" : "player",
 								"bullet_type" : "test",
-								"bullet_speed" : 3,
+								"bullet_speed" : 1.75,
+								"spawn_from" : "midbottom",
+							}
+						}
+					},
+					
+				]
+			},
+		]
+	}
+},
+{
+	"image" : "test-enemy.png",
+	"type" : "enemy",
+	"spawns_at" : 100,
+	"invulnerable" : True,
+	"velocity" : (0,0),
+	"position" : (400, 100),
+	"outer_size" : (20, 60),
+	"hithox_size" : (20,60),
+	"actions" : { 
+                "singles" : [ { "tick" : 10000, "action_type" : "destroy" } ],
+		"repeatings" : [
+			{
+				"tick-length" : 72,
+				"begins-tick" : 20,
+				"actions" : [
+					{
+						"tick" : 1,
+						"action_type" : "spawn",
+						"spawn" : {
+							"spawn_type" : "bullet",
+							"pattern_name" : "line",
+							"parameters" : {
+								"n_bullets" : 5,
+								"position_x_offset" : 35,
+								"angle_offset" : 2,
+								"target" : "player",
+								"bullet_type" : "test",
+								"bullet_speed" : 1.75,
 								"spawn_from" : "midbottom",
 							}
 						}

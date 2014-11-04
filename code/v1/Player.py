@@ -8,7 +8,7 @@ SPEED_FOCUSED = 1.5
 
 class Player(GameObject):
 	def __init__(self,mediator):
-		super(Player, self).__init__(mediator,(0,0), pygame.image.load("../../graphics/test-player.png"),(200,200),(25,50),{})
+		super(Player, self).__init__(mediator,(0,0), pygame.image.load("../../graphics/test-player.png"),(200,200),(25,50),(2,2),{})
 		self.focused = False
 
 	def controller_input(self,input_array):

@@ -33,6 +33,13 @@ class Mediator(object):
 		self.delayed_bullets()
 		self.move_units()
 		self.check_bound_bullets()
+		self.bullet_collisions()
+
+	def bullet_collisions(self):
+		player_hb = self.player.get_hitbox()
+		for b in self.enemy_bullets:
+			if b.get_hitbox().colliderect(player_hb):
+				print "DEADSLES"
 
 	def delayed_bullets(self): 
 		removals = []
@@ -76,7 +83,7 @@ class Mediator(object):
 	def spawn_from_dict(self,spawn):
 		image = pygame.image.load("../../graphics/{}".format(spawn["image"]))
 		if spawn["type"] == "enemy":
-			s = Spawner(self,spawn["velocity"],image,spawn["position"],spawn["outer_size"],spawn["actions"])
+			s = Spawner(self,spawn["velocity"],image,spawn["position"],spawn["outer_size"],spawn.get("hitbox",(5,5)),spawn["actions"])
 			s.set_tick_made(self.get_tick())
 			self.add_enemy(s)
 		
